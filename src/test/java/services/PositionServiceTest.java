@@ -35,7 +35,7 @@ class PositionServiceTest {
         PositionService positionService = new PositionService();
         Position oldPosition = new Position(3, 2, Coordonnee.SUD.getName());
         Position newPosition = positionService.moveLeft(oldPosition.clone());
-        Position expectedPosition = new Position(2, 2, Coordonnee.NORD.getName());
+        Position expectedPosition = new Position(2, 2, Coordonnee.SUD.getName());
         assertTrue(newPosition.equals(expectedPosition), "Doit modifier la position actuelle en decrementer x-1 sans changer d'orientation");
     }
 
@@ -44,7 +44,7 @@ class PositionServiceTest {
         PositionService positionService = new PositionService();
         Position oldPosition = new Position(1, 2, Coordonnee.SUD.getName());
         Position newPosition = positionService.moveRight(oldPosition.clone());
-        Position expectedPosition = new Position(2, 2, Coordonnee.NORD.getName());
+        Position expectedPosition = new Position(2, 2, Coordonnee.SUD.getName());
         assertTrue(newPosition.equals(expectedPosition), "Doit modifier la position actuelle en decrementer x+1 sans changer d'orientation");
     }
 
@@ -59,7 +59,9 @@ class PositionServiceTest {
     void move() {
         PositionService positionService = new PositionService();
         Position oldPosition = new Position(2, 3, Coordonnee.SUD.getName());
-        assertTrue(positionService.canMove(oldPosition, Orientation.AVANCE.getName(),MAX_X,MAX_Y));
+        Position newPosition = positionService.move(oldPosition.clone());
+        Position expectedPosition = new Position(2, 2, Coordonnee.SUD.getName());
+        assertTrue(newPosition.equals(expectedPosition), "Doit modifier la position actuelle en decrementer y-1 sans changer d'orientation");
     }
 
     @Test
