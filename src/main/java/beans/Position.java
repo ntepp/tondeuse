@@ -61,10 +61,6 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
-                "x=" + x +
-                ", y=" + y +
-                ", coordonnee='" + coordonnee + '\'' +
-                '}';
+        return x +" "+ y + " " + coordonnee;
     }
 }
