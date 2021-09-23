@@ -5,6 +5,9 @@ import enumarations.Coordonnee;
 import enumarations.Orientation;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PositionServiceTest {
@@ -72,5 +75,16 @@ class PositionServiceTest {
         positionService.getPosition(movement, oldPosition, MAX_X, MAX_Y);
         Position expectedPosition = new Position(1, 3, Coordonnee.NORD.getName());
         assertTrue(oldPosition.equals(expectedPosition));
+    }
+
+    @Test
+    void getAllFinalPositionFromFile() throws IOException {
+        Position expectedPosition1 = new Position(1, 3, Coordonnee.NORD.getName());
+        Position expectedPosition2 = new Position(5, 1, Coordonnee.EST.getName());
+        PositionService positionService = new PositionService();
+        List<Position> finalPositionList = positionService.getAllFinalPositionFromFile();
+        assertTrue(!finalPositionList.isEmpty(), "La liste des positions finale des tondeuses ne peux etre vide");
+        assertEquals(expectedPosition1, finalPositionList.get(0), "Le resultat attendue est 1 3 N");
+        assertEquals(expectedPosition2, finalPositionList.get(1), "Le resultat attendue est 5 1 E");
     }
 }

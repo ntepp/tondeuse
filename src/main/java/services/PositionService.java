@@ -3,6 +3,11 @@ package services;
 import beans.Position;
 import enumarations.Coordonnee;
 import enumarations.Orientation;
+import utils.FileUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PositionService {
 
@@ -76,5 +81,35 @@ public class PositionService {
             }
         }
         return p;
+    }
+
+    public List<Position> getAllFinalPositionFromFile() throws IOException {
+        int Xn = 0;
+        int Yn = 0;
+        PositionService moveService = new PositionService();
+        List<Position> finalPositionList = new ArrayList<>();
+
+        FileUtils fileUtils = new FileUtils();
+        List<String> input = fileUtils.readFile();
+
+        if(input.size() >0){
+            Xn = Integer.parseInt(input.get(0).split(" ")[0]);
+            Yn = Integer.parseInt(input.get(0).split(" ")[0]);
+
+            for (int i = 1; i < input.size() - 1; i=i+2) {
+                String position = input.get(i);;
+                String move = input.get(i+1);
+
+                int x = Integer.parseInt(position.split(" ")[0]);
+                int y = Integer.parseInt(position.split(" ")[1]);
+                String cardinal = position.split(" ")[2];
+
+                Position p = new Position(x, y, cardinal);
+                moveService.getPosition(move, p, Xn, Yn);
+                finalPositionList.add(p);
+            }
+        }
+
+        return finalPositionList;
     }
 }
