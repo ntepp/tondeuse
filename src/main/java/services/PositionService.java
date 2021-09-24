@@ -57,47 +57,51 @@ public class PositionService {
             String orientation = ""+ move.charAt(m);
             if(Orientation.AVANCE.getName().equals(orientation) && canMove(new Position(p.getX(), p.getY(), p.getCoordonnee()),orientation, Xn, Yn)){
                 p = move(p);
-            }else if(Orientation.DROITE.getName().equals(orientation)) {
-                if(p.getCoordonnee().equals(Coordonnee.NORD.getName())) {
-                    p.setCoordonnee(Coordonnee.EST.getName());
-                }else if(p.getCoordonnee().equals(Coordonnee.EST.getName())) {
-                    p.setCoordonnee(Coordonnee.SUD.getName());
-                }else if (p.getCoordonnee().equals(Coordonnee.SUD.getName())) {
-                    p.setCoordonnee(Coordonnee.EST.getName());
-                }else if (p.getCoordonnee().equals(Coordonnee.WEST.getName())) {
-                    p.setCoordonnee(Coordonnee.NORD.getName());
-                }
-            } else if(Orientation.GAUCHE.getName().equals(orientation)) {
-                if(p.getCoordonnee().equals(Coordonnee.NORD.getName())) {
-                    p.setCoordonnee(Coordonnee.WEST.getName());
-                }else if(p.getCoordonnee().equals(Coordonnee.WEST.getName())) {
-                    p.setCoordonnee(Coordonnee.SUD.getName());
-                }else if (p.getCoordonnee().equals(Coordonnee.SUD.getName())) {
-                    p.setCoordonnee(Coordonnee.EST.getName());
-                }else if (p.getCoordonnee().equals(Coordonnee.EST.getName())) {
-                    p.setCoordonnee(Coordonnee.NORD.getName());
-                }
-
+            }else {
+                setCoordooneeByOrientation(p, orientation);
             }
         }
         return p;
     }
 
+    private void setCoordooneeByOrientation(Position p, String orientation) {
+        if(Orientation.DROITE.getName().equals(orientation)) {
+            if(p.getCoordonnee().equals(Coordonnee.NORD.getName())) {
+                p.setCoordonnee(Coordonnee.EST.getName());
+            }else if(p.getCoordonnee().equals(Coordonnee.EST.getName())) {
+                p.setCoordonnee(Coordonnee.SUD.getName());
+            }else if (p.getCoordonnee().equals(Coordonnee.SUD.getName())) {
+                p.setCoordonnee(Coordonnee.EST.getName());
+            }else if (p.getCoordonnee().equals(Coordonnee.WEST.getName())) {
+                p.setCoordonnee(Coordonnee.NORD.getName());
+            }
+        } else if(Orientation.GAUCHE.getName().equals(orientation)) {
+            if(p.getCoordonnee().equals(Coordonnee.NORD.getName())) {
+                p.setCoordonnee(Coordonnee.WEST.getName());
+            }else if(p.getCoordonnee().equals(Coordonnee.WEST.getName())) {
+                p.setCoordonnee(Coordonnee.SUD.getName());
+            }else if (p.getCoordonnee().equals(Coordonnee.SUD.getName())) {
+                p.setCoordonnee(Coordonnee.EST.getName());
+            }else if (p.getCoordonnee().equals(Coordonnee.EST.getName())) {
+                p.setCoordonnee(Coordonnee.NORD.getName());
+            }
+
+        }
+    }
+
     public List<Position> getAllFinalPositionFromFile() throws IOException {
-        int Xn = 0;
-        int Yn = 0;
         PositionService moveService = new PositionService();
         List<Position> finalPositionList = new ArrayList<>();
 
         FileUtils fileUtils = new FileUtils();
         List<String> input = fileUtils.readFile();
 
-        if(input.size() >0){
-            Xn = Integer.parseInt(input.get(0).split(" ")[0]);
-            Yn = Integer.parseInt(input.get(0).split(" ")[0]);
+        if(!input.isEmpty()){
+            int Xn = Integer.parseInt(input.get(0).split(" ")[0]);
+            int Yn = Integer.parseInt(input.get(0).split(" ")[0]);
 
             for (int i = 1; i < input.size() - 1; i=i+2) {
-                String position = input.get(i);;
+                String position = input.get(i);
                 String move = input.get(i+1);
 
                 int x = Integer.parseInt(position.split(" ")[0]);

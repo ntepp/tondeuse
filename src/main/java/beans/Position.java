@@ -55,7 +55,7 @@ public class Position {
         return this.x == p.getX() && this.y == p.getY() && this.coordonnee.equals(p.getCoordonnee());
     }
 
-    public Position clone() {
+    public Position copy() {
         return new Position(x, y, coordonnee);
     }
 
