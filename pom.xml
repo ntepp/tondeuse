@@ -14,6 +14,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
+        <sonar.projectKey>tondeuse</sonar.projectKey>
     </properties>
 
     <dependencies>
