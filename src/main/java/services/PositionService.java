@@ -97,8 +97,8 @@ public class PositionService {
         List<String> input = fileUtils.readFile();
 
         if(!input.isEmpty()){
-            int Xn = Integer.parseInt(input.get(0).split(" ")[0]);
-            int Yn = Integer.parseInt(input.get(0).split(" ")[0]);
+            int m = Integer.parseInt(input.get(0).split(" ")[0]);
+            int n = Integer.parseInt(input.get(0).split(" ")[0]);
 
             for (int i = 1; i < input.size() - 1; i=i+2) {
                 String position = input.get(i);
@@ -109,7 +109,7 @@ public class PositionService {
                 String cardinal = position.split(" ")[2];
 
                 Position p = new Position(x, y, cardinal);
-                moveService.getPosition(move, p, Xn, Yn);
+                moveService.getPosition(move, p, m, n);
                 finalPositionList.add(p);
             }
         }
