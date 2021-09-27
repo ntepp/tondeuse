@@ -52,10 +52,10 @@ public class PositionService {
         return p;
     }
 
-    public Position getPosition(String move, Position p, int Xn, int Yn) {
+    public Position getPosition(String move, Position p, int x, int y) {
         for(int m = 0; m < move.length(); m++){
             String orientation = ""+ move.charAt(m);
-            if(Orientation.AVANCE.getName().equals(orientation) && canMove(new Position(p.getX(), p.getY(), p.getCoordonnee()),orientation, Xn, Yn)){
+            if(Orientation.AVANCE.getName().equals(orientation) && Boolean.TRUE.equals(canMove(new Position(p.getX(), p.getY(), p.getCoordonnee()),orientation, x, y))){
                 p = move(p);
             }else {
                 setCoordooneeByOrientation(p, orientation);
